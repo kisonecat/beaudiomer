@@ -8,5 +8,8 @@ cd ~/texmf/tex/latex
 git clone 
 ```
 
-In the preamble of your beamer file, include `\usepackage{beaudiomer}` and on the appropriate slide, include `\audio{the-relevant-audio-file.wav}`.  After you `pdflatex` your beamer file, the resulting PDF will include special annotations describing the relevant audio.  Then build an mp4 with `ruby ~/texmf/tex/latex/beaudiomer.rb filename.pdf` where `filename.pdf` is the PDF that pdflatex produced.
+In the preamble of your beamer file, include `\usepackage{beaudiomer}` and on the appropriate slides, include `\audio{the-relevant-audio-file.wav}`.  After you `pdflatex` your beamer file, the resulting PDF will include special annotations describing the relevant audio.  Build an mp4 with `ruby ~/texmf/tex/latex/beaudiomer.rb filename.pdf` where `filename.pdf` is the PDF that pdflatex produced.
 
+## Dependencies
+
+You will need to have `gem install libxml-ruby` and `gem install pdf-reader` in order for the beaudiomer.rb script to run.  That script also depends on `mutool` for rasterizing the PDF into PNGs and `melt` (a command-line tool which provides access to MLT) for producing the video file.

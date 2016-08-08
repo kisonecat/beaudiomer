@@ -1,0 +1,20 @@
+% this is my first package
+% 
+% (c) 2016 Jim Fowler
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+% 
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beaudiomer}
+  [2016/08/08 v0.01 Beamer packages for the audio command]
+
+\newcommand{\audio}[1]{\pdfannot%
+{%
+/T (Audio)%
+/Contents (\pdfescapestring{#1})}}
+
+\endinput
+%%
+%% End of file `beaudiomer.sty'.

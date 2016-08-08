@@ -3,7 +3,7 @@ require 'xml'
 require 'tmpdir'
 require 'tempfile'
 
-filename = "sample.pdf"
+filename = ARGV[0]
 
 path = File.dirname( File.absolute_path(filename) )
 

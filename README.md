@@ -5,10 +5,10 @@ Beaudiomer is a package and Ruby script (relying on [MLT](https://www.mltframewo
 To use this, `git clone` this package into, say, your local TEXMF/tex/latex, e.g.,
 ```bash
 cd ~/texmf/tex/latex
-git clone 
+git clone https://github.com/kisonecat/beaudiomer.git
 ```
 
-In the preamble of your beamer file, include `\usepackage{beaudiomer}` and on the appropriate slides, include `\audio{the-relevant-audio-file.wav}`.  After you `pdflatex` your beamer file, the resulting PDF will include special annotations describing the relevant audio.  Build an mp4 with `ruby ~/texmf/tex/latex/beaudiomer.rb filename.pdf` where `filename.pdf` is the PDF that pdflatex produced.
+In the preamble of your beamer file, include `\usepackage{beaudiomer}` and on the appropriate slides, include `\audio{the-relevant-audio-file.wav}`.  After you `pdflatex` your beamer file, the resulting PDF will include special annotations pointing to the audio file.  Build an .mp4 with `ruby ~/texmf/tex/latex/beaudiomer.rb filename.pdf` where `filename.pdf` is the PDF that pdflatex produced.
 
 ## Dependencies
 

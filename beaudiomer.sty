@@ -10,10 +10,14 @@
 \ProvidesPackage{beaudiomer}
   [2016/08/08 v0.01 Beamer packages for the audio command]
 
-\newcommand{\audio}[1]{\pdfannot%
+\newcommand{\audioannot}[1]{\pdfannot%
 {%
 /T (Audio)%
 /Contents (\pdfescapestring{#1})}}
+
+\def\audio{\@ifnextchar<{\beaudiomer@audio}{\beaudiomer@@audio}}
+\long\def\beaudiomer@audio<#1>#2{\only<#1>{\audioannot{#2}}}
+\long\def\beaudiomer@@audio#1{\only<\c@beamerpauses>{\audioannot{#1}}}
 
 \endinput
 %%

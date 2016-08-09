@@ -128,15 +128,13 @@ for page in reader.pages
     frame_rate_num = doc.find('profile')[0]['frame_rate_num'].to_i
     frame_rate_den = doc.find('profile')[0]['frame_rate_den'].to_i
     frame_rate = frame_rate_num.to_f / frame_rate_den.to_f
-    puts frame_rate
-    cut_in = doc.find('tractor')[0]['in'].to_i
+
+    # Cut out a bit of the beginning of the audio files
+    cut_in = doc.find('tractor')[0]['in'].to_i + 5
     cut_out = doc.find('tractor')[0]['out'].to_i
-
-    cut_in = (cut_in * frame_rate)
-    cut_out = (cut_out * frame_rate)
-
-    cut_in = (cut_in / 30.0).floor
-    cut_out = (cut_out / 30.0).ceil
+    
+    cut_in = (cut_in * 30.0 / frame_rate).floor
+    cut_out = (cut_out * 30.0 / frame_rate).ceil
   end
 
   starts[page.number] = scene_start
@@ -187,5 +185,6 @@ puts audio
 
 
 `melt #{f.path} -profile atsc_1080p_30 -consumer avformat:dump.mp4 acodec=libmp3lame vcodec=libx264`
+#`melt #{f.path}`
 
 }

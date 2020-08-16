@@ -1,5 +1,24 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i python3 -p "python3.withPackages(ps: [ps.pypdf2 ps.pymupdf])"
+#
+# This file is part of https://github.com/kisonecat/beaudiomer
+# Copyright (c) 2020 Jim Fowler
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program can also be redistributed and/or modified under the terms
+# of the LaTeX Project Public License version 1.3c, or later.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import argparse
 import fitz
@@ -62,9 +81,9 @@ def main():
                     if count > 1:
                         raise Exception("Too many annotations on page " + str(i+1))
             if kind == 'audio':
-                output.write('  <video src="{}" slide="{}" />'.format(contents, png) + "\n")
+                output.write('  <video src="{}" slide="{}"/>'.format(contents, png) + "\n")
             elif kind == 'video':
-                output.write('  <video src="{}" />'.format(contents) + "\n")
+                output.write('  <video src="{}" overlay="{}"/>'.format(contents, png) + "\n")
             elif kind == 'wait':
                 output.write('  <video src="{}" in="0" out="{}"/>'.format(png,contents) + "\n")
 

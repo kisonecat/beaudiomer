@@ -9,42 +9,33 @@
 \ProvidesPackage{beaudiomer}
   [2020/06/11 v1.00 Beamer packages for the audio, video, wait commands]
 
-\newcommand{\audioannot}[1]{\pdfannot%
+\@ifclassloaded{beamer}{%
+\newcommand<>{\audio}[2][]{\only#3{\pdfannot%
 {%
 /Subtype /Text%
 /F 1%
 /T (Audio)%
-/Contents (\pdfescapestring{#1})%
-}}
+/Contents (\pdfescapestring{#2})%
+}}}
 
-\def\audio{\@ifnextchar<{\beaudiomer@audio}{\beaudiomer@@audio}}
-\long\def\beaudiomer@audio<#1>#2{\only<#1>{\audioannot{#2}}}
-\long\def\beaudiomer@@audio#1{\only<\c@beamerpauses>{\audioannot{#1}}}
-
-\newcommand{\videoannot}[1]{\pdfannot%
+\newcommand<>{\video}[2][]{\only#3{\pdfannot%
 {%
 /Subtype /Text%
 /F 1%
 /T (Video)%
-/Contents (\pdfescapestring{#1})%
-}}
+/Contents (\pdfescapestring{#2})%
+}}}
 
-\def\video{\@ifnextchar<{\beaudiomer@video}{\beaudiomer@@video}}
-\long\def\beaudiomer@video<#1>#2{\only<#1>{\videoannot{#2}}}
-\long\def\beaudiomer@@video#1{\only<\c@beamerpauses>{\videoannot{#1}}}
-
-\newcommand{\waitannot}[1]{\pdfannot%
+\newcommand<>{\wait}[2][]{\only#3{\pdfannot%
 {%
 /Subtype /Text%
 /F 1%
 /T (Wait)%
-/Contents (\pdfescapestring{#1})%
-}}
-
-\def\wait{\@ifnextchar<{\beaudiomer@wait}{\beaudiomer@@wait}}
-\long\def\beaudiomer@wait<#1>#2{\only<#1>{\waitannot{#2}}}
-\long\def\beaudiomer@@wait#1{\only<\c@beamerpauses>{\waitannot{#1}}}
-
+/Contents (\pdfescapestring{#2})%
+}}}
+}{%
+  \PackageError{beaudiomer}{Class file not supported}{Try using the `beamer' documentclass}
+}
 \endinput
 %%
 %% End of file `beaudiomer.sty'.

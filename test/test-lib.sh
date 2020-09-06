@@ -3,6 +3,11 @@ run_latex () {
     pdflatex -halt-on-error $1 1>${base}.stdout 2>${base}.stderr
 }
 
+run_lualatex () {
+    base=$(basename $1 .tex)
+    lualatex -halt-on-error $1 1>${base}.stdout 2>${base}.stderr
+}
+
 fail_test () {
     printf "FAIL: %s: %s\n" "$test_name" "$1"
     exit 1

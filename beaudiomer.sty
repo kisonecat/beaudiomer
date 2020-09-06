@@ -9,13 +9,19 @@
 \ProvidesPackage{beaudiomer}
   [2020/06/11 v1.00 Beamer packages for the audio, video, wait commands]
 
+\RequirePackage{pdftexcmds} % \pdf@escapestring, works in both pdftex, luatex
+\RequirePackage{ifluatex}
+\ifluatex
+\protected\def\pdfannot {\pdfextension annot}
+\fi
+
 \@ifclassloaded{beamer}{%
 \newcommand<>{\audio}[2][]{\only#3{\pdfannot%
 {%
 /Subtype /Text%
 /F 1%
 /T (Audio)%
-/Contents (\pdfescapestring{#2})%
+/Contents (\pdf@escapestring{#2})%
 }}}
 
 \newcommand<>{\video}[2][]{\only#3{\pdfannot%
@@ -23,7 +29,7 @@
 /Subtype /Text%
 /F 1%
 /T (Video)%
-/Contents (\pdfescapestring{#2})%
+/Contents (\pdf@escapestring{#2})%
 }}}
 
 \newcommand<>{\wait}[2][]{\only#3{\pdfannot%
@@ -31,7 +37,7 @@
 /Subtype /Text%
 /F 1%
 /T (Wait)%
-/Contents (\pdfescapestring{#2})%
+/Contents (\pdf@escapestring{#2})%
 }}}
 }{%
   \PackageError{beaudiomer}{Class file not supported}{Try using the `beamer' documentclass}

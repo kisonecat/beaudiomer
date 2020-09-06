@@ -64,22 +64,23 @@ def main():
             contents = '5'
 
             count = 0
-            for annot in page['/Annots']:
-                # Other subtypes, such as /Link, cause errors
-                subtype = annot.getObject()['/Subtype']
-                if subtype == "/Text":
-                    if annot.getObject()['/T'] == 'Wait':
-                        kind = 'wait'
-                        contents = annot.getObject()['/Contents']
-                    if annot.getObject()['/T'] == 'Audio':
-                        kind = 'audio'
-                        contents = annot.getObject()['/Contents']
-                    if annot.getObject()['/T'] == 'Video':
-                        kind = 'video'
-                        contents = annot.getObject()['/Contents']
-                    count = count + 1
-                    if count > 1:
-                        raise Exception("Too many annotations on page " + str(i+1))
+            if '/Annots' in page:
+                for annot in page['/Annots']:
+                    # Other subtypes, such as /Link, cause errors
+                    subtype = annot.getObject()['/Subtype']
+                    if subtype == "/Text":
+                        if annot.getObject()['/T'] == 'Wait':
+                            kind = 'wait'
+                            contents = annot.getObject()['/Contents']
+                        if annot.getObject()['/T'] == 'Audio':
+                            kind = 'audio'
+                            contents = annot.getObject()['/Contents']
+                        if annot.getObject()['/T'] == 'Video':
+                            kind = 'video'
+                            contents = annot.getObject()['/Contents']
+                        count = count + 1
+                        if count > 1:
+                            raise Exception("Too many annotations on page " + str(i+1))
             if kind == 'audio':
                 output.write('  <video src="{}" slide="{}"/>'.format(contents, png) + "\n")
             elif kind == 'video':
